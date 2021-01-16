@@ -1,0 +1,71 @@
+コミットメッセージに適切なメッセージを付加する
+複数の作業をまとめてコミットせず、作業単位で細かくコミットしていく
+動作しない、正しく表示されないものなどのタイミングではコミットしない
+
+リセット
+コミットの取り消し - Soft
+ステージングの取り消し - Mixed
+ファイルの変更の取り消し - Hard
+
+Ammend（改正する）：直前のコミットに変更を追加する
+squash：隣り合った複数のコミットを１つにまとめる
+
+コミットログをきれいにまとめていくことが重要
+
+「Ctrl」「Shift」「Enter」で直接コミット
+
+本番環境へのリリースなど重要なコミットにはタグをつけることができる
+タグは半角英数でバージョン番号をつけることが一般的
+例）v1.0
+Webサイトの場合はリリース日
+例）r20210115
+
+リベースで履歴をまとめる
+
+チェリーピック（つまみ食い）：他のブランチの変更を一部合流させたい
+
+GitFlow:Gitのブランチのルール
+
+A successful Git branching model
+https://nvie.com/posts/a-successful-git-branching-model/
+https://qiita.com/homhom44/items/9f13c646fa2619ae63d0
+
+3つのブランチ
+2つのフォルダ
+
+master：ベースとなるブランチ
+-hotfixes：masterで変更を加えたい時、一時的に分岐する
+-release branches
+develop：開発用ブランチ
+-feature branches（注目する）
+
+master
+・直接編集しない
+・リリース状態を維持する
+・本番環境と同期させる
+
+develop
+・ここで編集する
+
+-release branches
+・developブランチでリリースできるところまできたら作成するブランチ
+・releaseフォルダの中にリリースするバージョンのブランチを作成
+・リリーステストをしている時に起きたバグをこのブランチで修正していく
+（developでは同時並行で引き続き開発を続ける）
+・リリーステストが終わったらリリースブランチをmasterにマージする
+・リリースブランチの変更をdevelopにもマージする
+
+-feature branches（注目する）
+・developブランチから追加する機能や作業ごとに作成するブランチ
+・featureフォルダの中に追加する機能や作業ごとのブランチを作成
+・featureブランチはdevelopブランチにしかマージされない
+
+-hotfixes
+・masterブランチから作成するブランチ
+・本番環境の緊急バグ修正用ブランチ（masterで編集しない）
+・緊急バグの修正が完了したらmasterにマージではなくリベースする
+・hotfixesブランチの変更をdevelopにもリベースする
+・修正完了後ブランチを削除
+
+GitHubフロー
+https://guides.github.com/introduction/flow/
